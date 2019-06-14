@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>Chat</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content #content>
+    <ion-list>
+        <div margin *ngFor="let message of messages">
+            <div [ngClass]="{'bubble': sender.id === message.sender.id, 'others-bubble': sender.id !== message.sender.id}" text-justify >
+                <ion-label>{{message.text}}</ion-label>
+            </div>
+            <div margin-start margin-end>
+                <ion-label class="info">{{message?.sender?.name}}</ion-label>
+                <ion-label class="info" float-end>{{message.timestamp | date:'short'}}</ion-label>
+            </div>
+        </div>
+    </ion-list>
+</ion-content>
+
+<ion-footer>
+    <ion-item *ngIf="messages">
+        <ion-label>Message:</ion-label>
+        <ion-input [(ngModel)]="messageText"></ion-input>
+        <ion-button (click)="send()">Add</ion-button>
+    </ion-item>
+</ion-footer>
